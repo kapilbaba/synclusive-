@@ -828,63 +828,26 @@ Fitness Companion App
 		<script src="js/theme.init.js"></script>
 
 	<!-- Google Maps -->
+		<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCt-lA0n-egYN_YmxdX2sqU1fagOjPR0Ac&callback=initMap"
+  async
+  defer>
+
+</script>
 		<script>
+function initMap() {
+  const location = { lat: 28.617166372791026, lng: 77.38715021534327 }; // Example: Delhi
 
-			/* 
-			Map Markers:
-			- Get an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key
-			- Generate Map Id: https://console.cloud.google.com/google/maps-apis/studio/maps
-			- Use https://www.latlong.net/convert-address-to-lat-long.html to get Latitude and Longitude of a specific address
-			*/
-			(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-				({key: "AIzaSyAZaHjy32TPVMxl1BgQRfulm2PKpbwCdR4", v: "weekly"});
+  const map = new google.maps.Map(document.getElementById("googlemaps"), {
+    zoom: 14,
+    center: location,
+  });
 
-			async function initMap() {
-				const { Map, InfoWindow } = await google.maps.importLibrary("maps");
-				const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
-					"marker",
-				);
-				const map = new Map(document.getElementById("googlemaps"), {
-					zoom: 14,
-					center: { lat: -37.817240, lng: 144.955820 },
-					mapId: "bacc27c8c034b32e",
-				});
-				const markers = [
-					{
-						position: { lat: -37.817240, lng: 144.955820 },
-						title: "Office 1<br>Melbourne, 121 King St, Australia<br>Phone: 123-456-1234",
-					}
-				];
-
-				const infoWindow = new InfoWindow();
-
-				markers.forEach(({ position, title }, i) => {
-					const pin = new PinElement({
-						background: "#e36159",
-						borderColor: "#e36159",
-						glyphColor: "#FFF",
-					});
-					const marker = new AdvancedMarkerElement({
-						position,
-						map,
-						title: `${title}`,
-						content: pin.element,
-					});
-
-					marker.addListener("click", ({ domEvent, latLng }) => {
-						const { target } = domEvent;
-
-						infoWindow.close();
-						infoWindow.setContent(marker.title);
-						infoWindow.open(marker.map, marker);
-					});
-				});	
-
-			}
-
-			initMap();	
-
-		</script>
-	<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"150b9db34298478c847cc7af76484de0","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body>
+  const marker = new google.maps.Marker({
+    position: location,
+    map: map,
+    title: "My Office Location",
+  });
+}
+</script></body>
 </html>
